@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>True Friend</title>
+
+    <!--jquery and jquery mobile stuff-->
+    <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" />-->
+    <script src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+    <!--<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>-->
+
+    <!--jquery template library-->
+    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
+    <!--underscore and backbone.js from cdn-->
+    <!--<script src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js"></script>-->
+    <!--<script src="http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js"></script>-->
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' type='text/javascript'></script>
+    <!--<script src="movie.js"></script>-->
+    <script src="soundmanager2-jsmin.js"></script>
+    <script>
+	soundManager.url = 'swf'
+	$(document).ready(function(){
+	    soundManager.onready(function(){
+		 Sound1 = soundManager.createSound({
+		    id: 'aSound',
+		    url: 'first.mp3',
+		    onload: move01
+		    // other options here..
+		}).load();
+		Sound2 = soundManager.createSound({
+		    id: 'bSound',
+		    url: 'last.mp3'
+		    // other options here..
+		}).load();
+
+	    });
+	});
+
+	move01 = function(){
+	    $("#casting").hide();
+		Sound1.play();
+	    $("#tigre_right").addClass('tigre1', 9000,function(){
+		$("#tigre_right").removeClass('tigre0').hide();
+		$("#monkey_left").removeClass('hide');
+		$("#tigre_left").css('top', '370px').show().addClass('tigre2', 8000, function(){
+		    $("#monkey_left").addClass('monkey1', 9000, function(){
+			$("#monkey_left").removeClass('monkey0').addClass('monkey2', 8000, move02)
+		    });
+		});
+	    });
+	};
+
+	move02 = function(){
+	    $("#monkey_left").hide().removeClass('monkey2').addClass('monkey4');
+	    $("#tigre_left").hide();
+	    $("#elephant_left").removeClass('hide');
+	    $("#monkey_right").addClass('monkey3').removeClass('hide').addClass('monkey5', 10000, function(){
+		$("#monkey_right").hide().removeClass('monkey5');
+		$("#tigre2_left").addClass('tigre3').show();
+		$("#monkey_left").show().addClass('monkey6', 4000);
+		$("#elephant_left").addClass('hathi2', 4000, function(){
+		    $("#tigre2_left").addClass('tigre4', 15000, move03);
+		});
+	    });
+	};
+
+	move03 = function(){
+	    Sound2.play();
+	    setTimeout(function(){
+		$("#elephant_left").addClass('hathi3');
+		$("#tigre2_left").removeClass('tigre3').addClass('tigre5', 1000, function(){
+		    $("#tigre2_left").hide();
+		    $("#elephant_left").hide();
+		    $("#elephant_right").addClass('hathi3').removeClass('hide');
+		    $('#monkey_left').hide();
+		    $("#monkey_right").addClass('monkey7').show();
+		    $("#elephant_right").addClass('hathi4', 20000);
+		    $("#monkey_right").addClass('monkey8', 20000, function(){
+			$("#elephant_right").hide();
+			$("#monkey_right").hide();
+			$("#casting").show();
+		    });
+		});
+	    }, 3000);
+	};
+    </script>
+    <style>
+	#background_forest { background: url('forest-1.jpg'); width: 900px; height: 480px; margin: 0 auto;}
+	#animals img {position: absolute;}
+	.hide {display: none;}
+	.tigre0 {top: 390px; left: 680px; width:40px;}
+	.tigre1 {top: 325px; left: 180px; width:160px;}
+	.tigre2 {left: 420px; width:125px;}
+	.tigre3 {top: 385px; left: 390px;}
+	.tigre4 {top: 385px; left: 380px;}
+	.tigre5 {top: 385px; left: 10px;}
+	.monkey0 {top: 167px; left: 763px;}
+	.monkey1{top: 50px; left: 700px;}
+	.monkey2{top: 50px; left: 100px;}
+	.monkey3{top: 420px; left: 100px;}
+	.monkey4{top: 430px; left: 845px;}
+	.monkey5{top: 430px; left: 845px;}
+	.monkey6{top: 430px; left: 460px;}
+	.monkey7{top: 320px; left: 485px;}
+	.monkey8{top: 320px; left: 1185px;}
+	.hathi1{top: 365px; left: 930px;}
+	.hathi2{top: 365px; left: 550px;}
+	.hathi3{top: 365px; left: 450px;}
+	.hathi4{top: 365px; left: 1150px;}
+	.casting_mid{ top: 5%; left:33%; width: 450px; font-family: Helvetica; ; padding:20px; text-align: center; background-color:#f5f5f5; border: 2px solid #9600cd; position:absolute; }
+	#names div {margin: 10px 0;}
+	#names span {font-size: 24px;}
+    </style>
+</head>
+<body>
+<style>
+</style>
+
+<div id="background_forest">
+<div id="animals">
+    <img id="tigre2_left" class="hide" src="tigre2.png" width="190px" />
+    <img id="tigre2_right" class="hide" src="tigre22.png" width="190px" />
+    <img id="tigre_left" class="tigre1 hide" src="tn_tiger2.png" />
+    <img id="tigre_right" class="tigre0" src="tigre1.png" />
+    <img id="elephant_left" class="hathi1 hide" src="elephant2.png" width="120px"/>
+    <img id="elephant_right" class="hide" src="elephant.png" width="120px"/>
+    <img id="monkey_left" class="hide monkey0" src="monkey.png" width="80px"/>
+    <img id="monkey_right" class="hide" src="monkey2.png" width="80px"/>
+</div>
+</div>
+
+<div id="casting" class="casting_mid" >
+    <div style="font-size: 50px">True Friend</div>
+    <div><i>HTML remake of <a target="_blank" href="http://www.youtube.com/watch?v=OlMnoWf08EU">Sachchha Dost</a></i></div>
+    <br />
+    <div id="names">
+    <div>Programming, Dialogs &amp; Direction<br> <span>Akshay Mathur</span></div>
+    <div>Production<br> <span>Shailja Mathur</span></div>
+    <div>Sounds<br> <span>Achintya &amp; Akshay Mathur</span></div>
+    <div>Story<br> <span>Nitin Chaturvedi</span></div>
+    <div>Graphics Help<br> <span>Rajesh Unde</span></div>
+    </div>
+</div>
